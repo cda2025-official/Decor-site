@@ -119,7 +119,7 @@ export default function Navbar() {
             alt="vCard tab content image"
               className="w-[300px] rounded-lg mx-auto"
             height="200"
-            src="https://placehold.co/600x400"
+            src="https://i.postimg.cc/QNSGzFF5/frame.png"
             width="200"
           />
         </div>
