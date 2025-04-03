@@ -21,12 +21,10 @@ interface VCardModalProps {
 export default function VCardModal({
   onClose,
   companyInfo = {
-    name: "Company Name",
-    phone: "+1234567890",
-    email: "contact@company.com",
-    address: "123 Business Street, City, Country",
-    website: "https://www.company.com",
-    position: "Business",
+    name: "Chintamani Decor",
+    phone: "+91 9970756249",
+    email: "chintamanidecorshowroom@gmail.com",
+    address: "Shop No 107, Chintamani Decor, New Timber Market, Bhavani Peth, Pune Maharashtra, 411042",
   },
 }: VCardModalProps) {
   const [name, setName] = useState("")
@@ -41,8 +39,6 @@ FN:${companyInfo.name}
 TEL;TYPE=WORK,VOICE:${companyInfo.phone}
 ${companyInfo.email ? `EMAIL;TYPE=WORK:${companyInfo.email}` : ""}
 ${companyInfo.address ? `ADR;TYPE=WORK:;;${companyInfo.address}` : ""}
-${companyInfo.website ? `URL:${companyInfo.website}` : ""}
-${companyInfo.position ? `TITLE:${companyInfo.position}` : ""}
 REV:${new Date().toISOString()}
 END:VCARD`
 
