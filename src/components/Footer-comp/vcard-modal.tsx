@@ -7,12 +7,61 @@ import { db } from "@/components/Firebase" // Adjust the import path as necessar
 
 interface VCardModalProps {
   onClose: () => void
+  companyInfo: {
+    name: string
+    phone: string
+    email?: string
+    address?: string
+    website?: string
+    logo?: string
+    position?: string
+  }
 }
 
-export default function VCardModal({ onClose }: VCardModalProps) {
+export default function VCardModal({
+  onClose,
+  companyInfo = {
+    name: "Company Name",
+    phone: "+1234567890",
+    email: "contact@company.com",
+    address: "123 Business Street, City, Country",
+    website: "https://www.company.com",
+    position: "Business",
+  },
+}: VCardModalProps) {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const generateVCard = () => {
+    // Create vCard format
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${companyInfo.name}
+TEL;TYPE=WORK,VOICE:${companyInfo.phone}
+${companyInfo.email ? `EMAIL;TYPE=WORK:${companyInfo.email}` : ""}
+${companyInfo.address ? `ADR;TYPE=WORK:;;${companyInfo.address}` : ""}
+${companyInfo.website ? `URL:${companyInfo.website}` : ""}
+${companyInfo.position ? `TITLE:${companyInfo.position}` : ""}
+REV:${new Date().toISOString()}
+END:VCARD`
+
+    return vcard
+  }
+
+  const downloadVCard = () => {
+    const vCardContent = generateVCard()
+    const blob = new Blob([vCardContent], { type: "text/vcard" })
+    const url = URL.createObjectURL(blob)
+
+    const link = document.createElement("a")
+    link.href = url
+    link.download = `${companyInfo.name.replace(/\s+/g, "_")}.vcf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+  }
 
   const handleDownload = async () => {
     if (!name || !phone) return
@@ -34,8 +83,11 @@ export default function VCardModal({ onClose }: VCardModalProps) {
       localStorage.setItem("visitorName", name)
       localStorage.setItem("visitorPhone", phone)
 
+      // Generate and download the vCard
+      downloadVCard()
+
       // Log and close the modal
-      console.log("Downloading vCard for", name, phone)
+      console.log("Downloaded vCard for", companyInfo.name)
       onClose()
     } catch (error) {
       console.error("Error saving visitor data:", error)
@@ -125,3 +177,4 @@ export default function VCardModal({ onClose }: VCardModalProps) {
     </div>
   )
 }
+
