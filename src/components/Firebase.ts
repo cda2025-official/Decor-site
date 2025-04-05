@@ -4,14 +4,13 @@ import { getFirestore } from "firebase/firestore";
 
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBkk0LEERGStm-QOdlDnO3IsMKvN6Ub3n8",
-    authDomain: "client-6bc79.firebaseapp.com",
-    databaseURL: "https://client-6bc79-default-rtdb.firebaseio.com",
-    projectId: "client-6bc79",
-    storageBucket: "client-6bc79.appspot.com",
-    messagingSenderId: "814256773172",
-    appId: "1:814256773172:web:8eef7107c9672b8cfa9261",
-    measurementId: "G-N95YNZZ3P8"
+  apiKey: "AIzaSyCdnGkj2VH3qOBe46MQ-4DxA3cASYmcnuU",
+  authDomain: "chintamani-decor.firebaseapp.com",
+  projectId: "chintamani-decor",
+  storageBucket: "chintamani-decor.firebasestorage.app",
+  messagingSenderId: "229678419182",
+  appId: "1:229678419182:web:8ef2c3fd0728bdbaeb77ff",
+  measurementId: "G-38ZJT01Y0Z"
   };
   
 const app = initializeApp(firebaseConfig);
